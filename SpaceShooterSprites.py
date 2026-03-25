@@ -43,4 +43,32 @@ class Ship:
     
     def draw(self):
         self.rect = self.window.blit(self.image, self.rect)
+
+class Laser:
+    def __init__(self, screen, position, angle, speed):
+        self.Originalimg = pygame.image.load("LaserBeam.png")
+        self.angle = angle
+        self.window = screen
+        self.image = self.Originalimg
+        self.speed = speed
+        #self.Laserimage = pygame.transform.rotate(self.Laserimage, self.angle)
         
+        self.rect = self.image.get_rect()
+        self.rect.topleft = position
+        self.newRect = ""
+        self.originalCenter = ""
+        self.originalPosition = ""
+        self.rotate()
+        
+    def rotate(self):
+        self.originalPosition = self.rect.topleft
+        self.originalCenter = self.rect.center
+        self.image = pygame.transform.rotate(self.Originalimg, self.angle)
+        self.newRect = self.image.get_rect()
+    
+    def move(self):
+        self.rect.x+= self.speed*math.cos((self.angle*math.pi)/180)
+        self.rect.y-= self.speed*math.sin((self.angle*math.pi)/180)
+    
+    def draw(self):
+        self.rect = self.window.blit(self.image, self.rect)

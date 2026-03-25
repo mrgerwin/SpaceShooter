@@ -18,6 +18,7 @@ pygame.font.init()
 font = pygame.font.SysFont("consolas", 30)
 FrameNum = 0
 player = Ship(window, [400, 400])
+lasers = []
 
 while True:
     FrameNum += 1
@@ -26,6 +27,9 @@ while True:
     player.rotate()
     player.move()
     player.draw()
+    for laser in lasers:
+        laser.move()
+        laser.draw()
     #pygame.draw.rect(window, white, player.rect)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -34,9 +38,8 @@ while True:
             sys.exit(0)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-
-                print("Pressed space")
-            
+                a_laser = Laser(window, player.rect.topleft, player.angle, 6)
+                lasers.append(a_laser) 
             elif event.key == pygame.K_a:
                 player.TurnSpeed=player.TurnAcceleration
                 #print(player.TurnSpeed)
