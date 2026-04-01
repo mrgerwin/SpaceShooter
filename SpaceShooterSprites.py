@@ -42,6 +42,7 @@ class Ship:
         self.rect.y += self.speed[1]
     
     def draw(self):
+        #pygame.draw.rect(self.window, [255, 255,255], self.rect)
         self.rect = self.window.blit(self.image, self.rect)
 
 class Laser:
