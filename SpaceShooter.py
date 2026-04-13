@@ -3,6 +3,7 @@ import pygame
 import random
 import time
 from SpaceShooterSprites import *
+import sys
 
 def drawText(font):
     label = font.render("Default", True, white)
@@ -34,7 +35,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit = True
-            pygame.quit()
+            #pygame.quit()
             sys.exit(0)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
