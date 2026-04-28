@@ -18,6 +18,8 @@ class Ship:
         self.TurnSpeed = 0
         self.TurnAcceleration = 4
         self.imageGo = pygame.image.load("Frigate3Go.png")
+        self.mask = pygame.mask.from_surface(self.image)
+        self.maskimg = self.mask.to_surface()
     
     def accelerate(self):
         self.speed[0] += (self.acceleration/4)*math.cos((self.angle*math.pi)/180)
@@ -44,6 +46,9 @@ class Ship:
     def draw(self):
         #pygame.draw.rect(self.window, [255, 255,255], self.rect)
         self.rect = self.window.blit(self.image, self.rect)
+        self.mask = pygame.mask.from_surface(self.image)
+        #self.maskimg = self.mask.to_surface()
+        #self.window.blit(self.maskimg, self.rect)
 
 class Laser:
     def __init__(self, screen, position, angle, speed):
