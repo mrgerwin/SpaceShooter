@@ -12,6 +12,7 @@ def drawText(font):
     
 black = [0 ,0,0]
 white = [255, 255, 255]
+red = [255, 0, 0]
 screen_size = [800,800]
 window = pygame.display.set_mode(screen_size)
 timer = pygame.time.Clock()
@@ -19,6 +20,12 @@ pygame.font.init()
 font = pygame.font.SysFont("consolas", 30)
 FrameNum = 0
 player = Ship(window, [400, 400])
+points = [(100, 100), (150, 150), (200, 100)]
+triangle = pygame.draw.polygon(window, red, points)
+triSurface = window.subsurface(triangle)
+theMask = pygame.mask.from_surface(triSurface)
+theMaskImage = theMask.to_surface()
+
 lasers = []
 
 while True:
@@ -27,7 +34,10 @@ while True:
     timer.tick(30)
     player.rotate()
     player.move()
-    player.draw()
+    shipMask = pygame.mask.from_surface(player.draw())
+    
+    pygame.draw.polygon(window, red, points)
+    window.blit(theMaskImage,[0,0])
     for laser in lasers:
         laser.move()
         laser.draw()
