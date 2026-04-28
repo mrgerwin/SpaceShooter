@@ -47,6 +47,7 @@ class Ship:
 
 class Laser:
     def __init__(self, screen, position, angle, speed):
+        self.LaserCharge = 0
         self.Originalimg = pygame.image.load("LaserBeam.png")
         self.angle = angle
         self.window = screen
@@ -61,6 +62,10 @@ class Laser:
         self.originalPosition = ""
         self.rotate()
         
+    def resize(self):
+        newWidth = self.rect.width + self.LaserCharge
+        self.image = pygame.transform.scale(self.Originalimg, [newWidth, self.rect.height])
+        self.rect = self.image.get_rect()
     def rotate(self):
         self.originalPosition = self.rect.topleft
         self.originalCenter = self.rect.center
